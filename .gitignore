@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.swp
+build/
+dist/
+*.egg-info/
+*.exe
+*.out
