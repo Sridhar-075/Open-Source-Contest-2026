@@ -1,79 +1,204 @@
-# Open Source Contest
+# File Manager Application (Virtual File System)
 
-- **Start Time:** 12th March 19:45
-- **Submission Deadline:** 13th March 23:59
+# Overview
 
-## Problem Statement
+This project is a **command-line based File Manager Application** that simulates a file system hierarchy in memory.
+Users can create, organize, view, rename, copy, move and delete files and folders without interacting with the real operating system file system.
 
-Create a **File Manager Application** that allows users to manage files and directories on their system.
-The application should provide basic functionality to create, organize, view, and remove files and folders.
-
----
-
-## Basic Features (Required)
-
-Your application must support the following basic operations.
-
-| Feature                | Description                                         | Syntax                               |
-| ---------------------- | --------------------------------------------------- | ------------------------------------ |
-| Create folders         | Create one or more folders in the current directory | `app folders <name1> <name2> ...`  |
-| Create nested folders  | Create folders inside existing folders              | `app folders <parent>,<child>`     |
-| Create files           | Create one or more files                            | `app files <name1> <name2> ...`    |
-| List contents          | Display files and folders in the current directory  | `app list`                         |
-| Show current directory | Display the current working directory               | `app pwd`                          |
-| Change directory       | Move to another directory                           | `app cd <folder>`                  |
-| Delete files/folders   | Remove files or folders                             | `app delete <name>`                |
-| Rename files/folders   | Rename a file or folder                             | `app rename <old_name> <new_name>` |
-| Copy files             | Copy a file to another location                     | `app copy <source> <destination>`  |
-| Move files             | Move a file or folder to another location           | `app move <source> <destination>`  |
-| Show file details      | Display metadata such as size and creation date     | `app info <file>`                  |
-
-- Please follow the best practices discussed during the open source week. It is one of the criteria for evaluation.
-- Error handling for invalid commands and other cases is **mandatory.**
-- Participants may implement **additional features** beyond the required ones.
-- Creative or advanced features will be considered for **extra points**.
-
-## Repository Naming Convention
-
-Participants must create a repository using the following format:
-
-Example format: `OSW-CS00B0000`
-Use **capital letters only** for the roll number.
+The application follows a **tree-based data structure** to represent directories and files and provides a shell-like interface for user interaction.
 
 ---
 
-## Repository Requirements
+# Folder Structure
 
-Each repository must include:
-
-- Source code for the File Manager application
-- `README.md`
-- `LICENSE`
-- `.gitignore`
-
-The **README.md is mandatory** and will be used during evaluation.
-
----
-
-## README Contents
-
-- **Folder Structure:** Describe the directory structure of your project.
-- **Language Used:** Mention the programming language and any frameworks or libraries used.
-- **Feature Description:** Provide a clear description of the features implemented in your file manager application.
-- **Dependencies:** List all required dependencies needed to build and run the project.
-- **How to Build:**  Provide the steps required to build or set up the application.
-- **How to Use:**  Explain how to run the application and how users interact with it.
+```
+OSW-CS00B0000
+│
+├── index.py        # Main application containing File Manager logic
+├── README.md       # Project documentation
+├── LICENSE
+└── .gitignore
+```
 
 ---
 
-## Demo Video
+# Language Used
 
-- Participants must create a **short demonstration video** explaining their application and its features.
-- Upload the video to **Google Drive** and provide the link in the submission form
-- Ensure the link has **public access (Anyone with the link can view)**.
+* **Python 3**
+* Standard Libraries:
+
+  * `time` → for file/folder creation timestamp
+  * `random` → for assigning random file size
+
+No external frameworks or third-party libraries are used.
 
 ---
 
-## Submission form
+# Features Implemented
 
-**Link:** https://forms.gle/NKuPfSMg6U3p1Anp6
+# Folder Operations
+
+* Create one or more folders in current directory
+
+  ```
+  app folders <name1> <name2>
+  ```
+* Create nested folders
+
+  ```
+  app folders <parent>, <child1> <child2>
+  ```
+* Navigate between directories
+
+  ```
+  app cd <folder>
+  app cd ..
+  ```
+* Show directory tree representation
+
+  ```
+  app represent
+  ```
+
+# File Operations
+
+* Create one or more files
+
+  ```
+  app files <name1> <name2>
+  ```
+* Display file metadata (creation date and size)
+
+  ```
+  app info <file>
+  ```
+
+# Directory Management
+
+* List contents of current directory
+
+  ```
+  app list
+  ```
+* Show current working directory
+
+  ```
+  app pwd
+  ```
+
+ File System Modification
+
+* Delete files or folders
+
+  ```
+  app delete <name>
+  ```
+* Rename files or folders
+
+  ```
+  app rename <old_name> <new_name>
+  ```
+* Copy files/folders using relative or absolute path
+
+  ```
+  app copy <source_path> <destination_path>
+  ```
+* Move files/folders
+
+  ```
+  app move <source_path> <destination_path>
+  ```
+
+ Tree Visualization
+
+Displays hierarchical structure of the virtual file system similar to Linux `tree` command.
+
+---
+
+ Dependencies
+
+This project uses only **Python standard library modules**:
+
+* Python 3.x installed
+* No additional packages required
+
+---
+
+## 🔧 How to Build / Setup
+
+1. Clone the repository:
+
+```
+git clone <repository_url>
+```
+
+2. Navigate to project folder:
+
+```
+cd OSW-CS00B0000
+```
+
+3. Run the program:
+
+```
+python index.py
+```
+
+---
+
+ How to Use
+
+The application runs in an interactive command loop.
+
+All commands must start with:
+
+```
+app
+```
+
+Example usage:
+
+```
+app folders docs
+app cd docs
+app files notes.txt
+app pwd
+app list
+app represent
+app rename notes.txt ideas.txt
+app delete ideas.txt
+```
+
+To exit the application:
+
+```
+exit
+```
+
+---
+
+ Design Approach
+
+* File system is represented as a **Tree Data Structure**
+* Each element is a **Node** with:
+
+  * name
+  * parent reference
+* Folders maintain a dictionary of children for fast lookup
+* Path resolution supports:
+
+  * relative paths (`..`, `.`)
+  * absolute paths (`/root/docs/file`)
+* Commands are parsed and executed using a central **App controller class**
+
+---
+
+
+
+---
+
+ License
+
+This project is licensed under the MIT License.
+
+---
